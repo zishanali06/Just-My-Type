@@ -56,10 +56,11 @@ $(document).keypress(function (e) {
             sentencecount = 0;
             charcount = 0;
             $('#yes').click(function () {
-                $('#yellow-block').css('margin-left', '0px');
-                $('#feedback').empty();
-                $('#sentence').empty();
-                $('#sentence').append(sentences[sentencecount]);
+                location.reload();
+                // $('#yellow-block').css('margin-left', '0px');
+                // $('#feedback').empty();
+                // $('#sentence').empty();
+                // $('#sentence').append(sentences[sentencecount]);
             });
             $('#no').click(function () {
                 alert("You can't be that scared!");
@@ -94,10 +95,11 @@ $(document).keypress(function (e) {
             sentencecount = 0;
             charcount = 0;
             $('#yes').click(function () {
-                $('#yellow-block').css('margin-left', '0px');
-                $('#feedback').empty();
-                $('#sentence').empty();
-                $('#sentence').append(sentences[sentencecount]);
+                location.reload();
+                // $('#yellow-block').css('margin-left', '0px');
+                // $('#feedback').empty();
+                // $('#sentence').empty();
+                // $('#sentence').append(sentences[sentencecount]);
             });
             $('#no').click(function () {
                 alert("You can't be that scared!");
