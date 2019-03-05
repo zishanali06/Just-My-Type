@@ -36,6 +36,8 @@ $(document).keypress(function (e) {
         }, 1000);
     }
     $("#" + letter).addClass('highlight');
+    let yesbutton = '<button id="yes">Yes</button>';
+    let nobutton = '<button id="no">No</button>';
     if (letter == sentences[sentencecount].charCodeAt(charcount)) {
         $('#yellow-block').css('margin-left', margin + 'px');
         $('#feedback').append('<span class="glyphicon glyphicon-ok"></span>');
@@ -47,11 +49,22 @@ $(document).keypress(function (e) {
             let minutes = timer / 60;
             let score = 54 / minutes;
             let finalscore = score - 2 * wrong;
-            alert('You are done!');
             $('#score').append("<p>" + finalscore + "</p>")
+            $('#score').append("<h3>Would you Like to play Again?</h3>")
+            $('#score').append(yesbutton);
+            $('#score').append(nobutton);
             sentencecount = 0;
             charcount = 0;
-        } else if(charcount > checknewline && sentencecount < sentences.length){
+            $('#yes').click(function () {
+                $('#yellow-block').css('margin-left', '0px');
+                $('#feedback').empty();
+                $('#sentence').empty();
+                $('#sentence').append(sentences[sentencecount]);
+            });
+            $('#no').click(function () {
+                alert("You can't be that scared!");
+            });
+        } else if (charcount > checknewline && sentencecount < sentences.length) {
             $('#feedback').empty();
             $('#sentence').empty();
             sentencecount++;
@@ -73,11 +86,23 @@ $(document).keypress(function (e) {
             let minutes = timer / 60;
             let score = 54 / minutes;
             let finalscore = score - 2 * wrong;
-            alert('You are done!');
             $('#score').append("<p>" + finalscore + "</p>")
+            $('#score').append("<p>" + finalscore + "</p>")
+            $('#score').append("<h3>Would you Like to play Again?</h3>")
+            $('#score').append(yesbutton);
+            $('#score').append(nobutton);
             sentencecount = 0;
             charcount = 0;
-        } else if(charcount > checknewline && sentencecount < sentences.length){
+            $('#yes').click(function () {
+                $('#yellow-block').css('margin-left', '0px');
+                $('#feedback').empty();
+                $('#sentence').empty();
+                $('#sentence').append(sentences[sentencecount]);
+            });
+            $('#no').click(function () {
+                alert("You can't be that scared!");
+            });
+        } else if (charcount > checknewline && sentencecount < sentences.length) {
             $('#feedback').empty();
             $('#sentence').empty();
             sentencecount++;
