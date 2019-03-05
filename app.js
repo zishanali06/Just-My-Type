@@ -49,6 +49,8 @@ $(document).keypress(function (e) {
             let finalscore = score - 2 * wrong;
             alert('You are done!');
             $('#score').append("<p>" + finalscore + "</p>")
+            sentencecount = 0;
+            charcount = 0;
         } else if(charcount > checknewline && sentencecount < sentences.length){
             $('#feedback').empty();
             $('#sentence').empty();
@@ -73,6 +75,8 @@ $(document).keypress(function (e) {
             let finalscore = score - 2 * wrong;
             alert('You are done!');
             $('#score').append("<p>" + finalscore + "</p>")
+            sentencecount = 0;
+            charcount = 0;
         } else if(charcount > checknewline && sentencecount < sentences.length){
             $('#feedback').empty();
             $('#sentence').empty();
