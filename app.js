@@ -25,28 +25,31 @@ $(document).keyup(function (e) {
 
 //highlight letter that is pressed and see if it is the right key
 let margin = 16;
+let timer = 0;
+let wrong = 0;
 $('#target-letter').append(sentences[sentencecount].charCodeAt(charcount));
 $(document).keypress(function (e) {
     let letter = e.keyCode;
+    if (sentencecount == 0 && charcount == 0) {
+        setInterval(function () {
+            timer++;
+        }, 1000);
+    }
     $("#" + letter).addClass('highlight');
-    if(letter == sentences[sentencecount].charCodeAt(charcount)){
+    if (letter == sentences[sentencecount].charCodeAt(charcount)) {
         $('#yellow-block').css('margin-left', margin + 'px');
         $('#feedback').append('<span class="glyphicon glyphicon-ok"></span>');
         charcount++;
         $('#target-letter').text(sentences[sentencecount].charAt(charcount));
-        margin+=18;
+        margin += 17;
         let checknewline = sentences[sentencecount].length;
-        if(charcount > checknewline){
-            $('#feedback').empty();
-        };
-    }else{
-        $('#yellow-block').css('margin-left', margin + 'px');
-        $('#feedback').append('<span class="glyphicon glyphicon-remove"></span>');
-        charcount++;
-        $('#target-letter').text(sentences[sentencecount].charAt(charcount));
-        margin+=18;
-        let checknewline = sentences[sentencecount].length;
-        if(charcount > checknewline){
+        if (charcount == checknewline && sentencecount == (sentences.length - 1)) {
+            let minutes = timer / 60;
+            let score = 54 / minutes;
+            let finalscore = score - 2 * wrong;
+            alert('You are done!');
+            $('#score').append("<p>" + finalscore + "</p>")
+        } else if(charcount > checknewline && sentencecount < sentences.length){
             $('#feedback').empty();
             $('#sentence').empty();
             sentencecount++;
@@ -54,11 +57,64 @@ $(document).keypress(function (e) {
             charcount = 0;
             margin = 0;
             $('#yellow-block').css('margin-left', margin + 'px');
+            console.log(sentencecount);
+        }
+    } else {
+        $('#yellow-block').css('margin-left', margin + 'px');
+        $('#feedback').append('<span class="glyphicon glyphicon-remove"></span>');
+        charcount++;
+        wrong++;
+        $('#target-letter').text(sentences[sentencecount].charAt(charcount));
+        margin += 17;
+        let checknewline = sentences[sentencecount].length;
+        if (charcount == checknewline && sentencecount == (sentences.length - 1)) {
+            let minutes = timer / 60;
+            let score = 54 / minutes;
+            let finalscore = score - 2 * wrong;
+            alert('You are done!');
+            $('#score').append("<p>" + finalscore + "</p>")
+        } else if(charcount > checknewline && sentencecount < sentences.length){
+            $('#feedback').empty();
+            $('#sentence').empty();
+            sentencecount++;
+            $('#sentence').append(sentences[sentencecount]);
+            charcount = 0;
+            margin = 0;
+            $('#yellow-block').css('margin-left', margin + 'px');
+            console.log(sentencecount);
         };
     };
-    console.log(sentences[sentencecount].charAt(charcount));
-    console.log(sentences[sentencecount].length);
+    // console.log(sentences[sentencecount].charAt(charcount));
+    // console.log(sentences[sentencecount].length);
+    console.log(timer);
+
 });
 $(document).keyup(function () {
     $('.highlight').removeClass('highlight');
 });
+
+
+
+// if (charcount == checknewline && sentencecount == sentences.length) {
+//     alert('You are done!');
+// } else if(charcount > checknewline){
+//     $('#feedback').empty();
+//     $('#sentence').empty();
+//     sentencecount++;
+//     $('#sentence').append(sentences[sentencecount]);
+//     charcount = 0;
+//     margin = 0;
+//     $('#yellow-block').css('margin-left', margin + 'px');
+// }
+
+// if (charcount > checknewline) {
+//     $('#feedback').empty();
+//     $('#sentence').empty();
+//     sentencecount++;
+//     $('#sentence').append(sentences[sentencecount]);
+//     charcount = 0;
+//     margin = 0;
+//     $('#yellow-block').css('margin-left', margin + 'px');
+// } else if(charcount == checknewline && sentencecount == sentences.length){
+//     alert('You are done!');
+// }
