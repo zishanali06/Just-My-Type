@@ -31,16 +31,33 @@ $(document).keypress(function (e) {
     $("#" + letter).addClass('highlight');
     if(letter == sentences[sentencecount].charCodeAt(charcount)){
         $('#yellow-block').css('margin-left', margin + 'px');
+        $('#feedback').append('<span class="glyphicon glyphicon-ok"></span>');
         charcount++;
         $('#target-letter').text(sentences[sentencecount].charAt(charcount));
-        margin+=17;
+        margin+=18;
+        let checknewline = sentences[sentencecount].length;
+        if(charcount > checknewline){
+            $('#feedback').empty();
+        };
     }else{
         $('#yellow-block').css('margin-left', margin + 'px');
+        $('#feedback').append('<span class="glyphicon glyphicon-remove"></span>');
         charcount++;
-        alert('wrong!');
         $('#target-letter').text(sentences[sentencecount].charAt(charcount));
-        margin+=17;
+        margin+=18;
+        let checknewline = sentences[sentencecount].length;
+        if(charcount > checknewline){
+            $('#feedback').empty();
+            $('#sentence').empty();
+            sentencecount++;
+            $('#sentence').append(sentences[sentencecount]);
+            charcount = 0;
+            margin = 0;
+            $('#yellow-block').css('margin-left', margin + 'px');
+        };
     };
+    console.log(sentences[sentencecount].charAt(charcount));
+    console.log(sentences[sentencecount].length);
 });
 $(document).keyup(function () {
     $('.highlight').removeClass('highlight');
